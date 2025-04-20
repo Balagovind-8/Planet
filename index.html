@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solar System Explorer</title>
+  <!-- Link to Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Title -->
+  <h1>Solar System Explorer</h1>
+  
+  <!-- Orbit Container: This will hold the canvas where planets will orbit -->
+  <div class="orbit-container">
+    <!-- Canvas where the orbit and planets will be drawn -->
+    <canvas id="orbitCanvas"></canvas>
+    
+    <!-- Planet Information Box (hidden by default, will show when planet is clicked) -->
+    <div id="planet-info" class="hidden">
+      <h3 id="planet-name">Planet Name</h3>
+      <p id="planet-description">Planet description...</p>
+      <p id="planet-distance">Distance from Sun: -- AU</p>
+      <p id="planet-radius">Radius: -- km</p>
+      <a href="#" id="planet-link" target="_blank">Learn More</a>
+    </div>
+  </div>
+  
+  <!-- Timeline Slider for controlling the planet's positions over time -->
+  <input type="range" id="timelineSlider" min="0" max="100" value="50">
+  
+  <!-- Add external JavaScript file -->
+  <script src="script.js"></script>
+</body>
+</html>
