@@ -1,63 +1,89 @@
- /* Global styles */
+ /* === BACKGROUND OPTIONS ===
+   (Uncomment one if you ever want to switch)
+*/
+
+/* Option 1: Full‑screen Space Image */
+/*
 body {
-  font-family: 'Poppins', sans-serif; /* Relaxing, modern font */
+  background: url('images/space-background.jpg') center center no-repeat fixed;
+  background-size: cover;
+}
+*/
+
+/* Option 2: Dark Gradient Only */
+/*
+body {
+  background: linear-gradient(to bottom, #0f0f0f, #1a1a1a, #2a2a2a);
+}
+*/
+
+/* Option 3: Gradient + Starry Overlay */
+body {
+  background: linear-gradient(to bottom, #0f0f0f, #1a1a1a, #2a2a2a);
+}
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url('https://cdn.pixabay.com/photo/2017/07/31/17/58/space-2556902_960_720.jpg') center center no-repeat;
+  background-size: cover;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+/* === COMMON STYLES === */
+body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(to bottom, #0f0f0f, #1a1a1a, #2a2a2a); /* Dark space gradient */
+  font-family: 'Poppins', sans-serif;
   color: #fff;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100vh;
-  overflow: hidden;
 }
 
-/* Title */
 h1 {
-  text-align: center;
+  margin: 20px 0;
+  font-family: 'Orbitron', sans-serif;
   font-size: 3rem;
-  margin-top: 20px;
-  color: #ffcc00; /* Solar system theme yellow */
-  text-shadow: 0px 0px 20px rgba(255, 204, 0, 0.8); /* Glowing effect */
-  font-family: 'Orbitron', sans-serif; /* Futuristic font */
-  letter-spacing: 5px;
-  margin-bottom: 30px;
+  color: #ffcc00;
+  text-shadow: 0 0 15px rgba(255,204,0,0.8);
+  animation: glow 1.5s infinite alternate;
 }
 
-/* Orbit container styles */
+@keyframes glow {
+  0%   { text-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00; }
+  100% { text-shadow: 0 0 20px #ffcc00, 0 0 30px #ffcc00; }
+}
+
 .orbit-container {
   position: relative;
   width: 100%;
-  height: 80vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  height: 60vh;
+  margin-bottom: 20px;
 }
 
 #orbitCanvas {
-  border: 2px solid #ffffff;
-  background-color: #000000;
+  width: 100%;
+  height: 100%;
   display: block;
-  box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.5);
-  transform: scale(1.05);
 }
 
-/* Planet Info Box */
 #planet-info {
   position: absolute;
-  bottom: 5%;
+  bottom: 10%;
   left: 5%;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: #fff;
-  padding: 15px;
-  border-radius: 15px;
-  font-size: 1.2rem;
-  width: 250px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  background: rgba(0,0,0,0.7);
+  padding: 12px;
+  border-radius: 8px;
+  max-width: 280px;
   opacity: 0;
   transition: opacity 0.3s ease;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
 #planet-info.active {
@@ -65,102 +91,59 @@ h1 {
 }
 
 #planet-info h3 {
-  font-size: 1.6rem;
+  margin: 0 0 8px;
   color: #ffcc00;
-  text-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00;
+  text-shadow: 0 0 5px #ffcc00;
 }
 
-#planet-info p {
-  font-size: 1rem;
-  line-height: 1.5;
+#timeline-control {
+  margin-bottom: 20px;
 }
 
-#planet-info a {
-  color: #ffcc00;
-  text-decoration: none;
-  font-weight: bold;
+#timeline-control label {
+  margin-right: 8px;
 }
 
-#planet-info a:hover {
-  color: #fff;
-  text-decoration: underline;
-}
-
-/* Timeline Slider */
 input[type="range"] {
-  position: absolute;
-  bottom: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  background: #444;
-  color: #fff;
-  height: 10px;
-  border-radius: 5px;
-  appearance: none;
-  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+  vertical-align: middle;
+  width: 250px;
 }
 
-input[type="range"]::-webkit-slider-thumb {
-  appearance: none;
-  background: #ffcc00;
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
-  cursor: pointer;
-  box-shadow: 0px 0px 10px rgba(255, 204, 0, 0.8);
+table {
+  width: 90%;
+  max-width: 1000px;
+  border-collapse: collapse;
+  margin: 20px 0 40px;
+  background: rgba(255,255,255,0.05);
+  box-shadow: 0 0 20px rgba(0,255,255,0.2);
 }
 
-input[type="range"]:focus {
-  outline: none;
+th, td {
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 12px;
+  text-align: center;
 }
 
-/* Hover effect for planets */
-canvas:hover {
-  cursor: pointer;
+th {
+  background: rgba(0,255,255,0.2);
 }
 
-/* Starry space background */
-body::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('https://cdn.pixabay.com/photo/2017/07/31/17/58/space-2556902_960_720.jpg') repeat center center;
-  opacity: 0.5;
-  pointer-events: none;
-  z-index: -1;
+tr:nth-child(even) {
+  background: rgba(255,255,255,0.05);
 }
 
-/* Keyframe animations */
-@keyframes glowing {
-  0% {
-    text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffcc00;
-  }
-  50% {
-    text-shadow: 0 0 20px #ffcc00, 0 0 30px #ffcc00, 0 0 40px #ffcc00;
-  }
-  100% {
-    text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffcc00;
-  }
-}
-
-h1 {
-  animation: glowing 1.5s infinite alternate;
+tr:hover {
+  background: rgba(0,255,255,0.1);
 }
 
 @media (max-width: 768px) {
-  #planet-info {
-    width: 200px;
-    font-size: 1rem;
-  }
-
   h1 {
     font-size: 2rem;
   }
-
+  #planet-info {
+    max-width: 200px;
+    font-size: 0.9rem;
+  }
   input[type="range"] {
     width: 90%;
   }
